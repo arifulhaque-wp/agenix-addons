@@ -1,0 +1,79 @@
+/* Editor preview: reuse frontend rules but ensure editor wrapper hover triggers reveal */
+.elementor-editor-active .agenix-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--agenix-icon-gap, 8px);
+    padding: 12px 24px;
+    border-radius: 6px;
+    color: var(--agenix-text-color, #fff);
+    background: var(--agenix-bg, #0073aa);
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 220ms ease, color 220ms ease;
+    box-sizing: border-box;
+}
+
+/* Ensure the button text uses the normal color variable */
+.agenix-button .agenix-button-text {
+    color: var(--agenix-text-color, #ffffff);
+    transition: color 220ms ease;
+    position: relative;
+    z-index: 2;
+}
+
+/* Use hover variable when the button is hovered or focused */
+.agenix-button:hover .agenix-button-text,
+.agenix-button:focus-within .agenix-button-text {
+    color: var(--agenix-hover-text-color, var(--agenix-text-color, #ffffff));
+}
+
+/* Editor canvas: trigger hover when the editor wrapper is hovered */
+.elementor-editor-active .elementor-element:hover .agenix-button .agenix-button-text {
+    color: var(--agenix-hover-text-color, var(--agenix-text-color, #ffffff));
+}
+
+/* overlay base (same as frontend) */
+.elementor-editor-active .agenix-button .agenix-hover-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--agenix-hover-bg, rgba(0, 0, 0, 0.08));
+    z-index: 1;
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 350ms cubic-bezier(.2, .9, .3, 1);
+    will-change: transform, opacity;
+}
+
+/* Editor wrapper hover triggers reveal (Elementor canvas often wraps widgets) */
+.elementor-editor-active .elementor-element:hover .agenix-button.reveal-left-to-right .agenix-hover-overlay,
+.elementor-editor-active .elementor-element:hover .agenix-button.reveal-right-to-left .agenix-hover-overlay,
+.elementor-editor-active .elementor-element:hover .agenix-button.reveal-top-to-bottom .agenix-hover-overlay,
+.elementor-editor-active .elementor-element:hover .agenix-button.reveal-bottom-to-top .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+/* ensure content above overlay */
+.elementor-editor-active .agenix-button .agenix-button-text,
+.elementor-editor-active .agenix-button .agenix-button-icon {
+    position: relative;
+    z-index: 2;
+}
+
+/* Hover shim: respond to class as well as :hover */
+.agenix-button.is-hover .agenix-hover-overlay,
+.agenix-button.is-hover:focus-within .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+/* Editor wrapper shim: when editor wrapper has is-hover, trigger overlay */
+.elementor-editor-active .elementor-element.is-hover .agenix-button .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+/* For right-to-left reveal keep origin */
+.agenix-button.reveal-right-to-left.is-hover .agenix-hover-overlay {
+    transform-origin: right center;
+}

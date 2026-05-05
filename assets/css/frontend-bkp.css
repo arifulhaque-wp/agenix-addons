@@ -1,0 +1,77 @@
+/* Ensure parent is positioned for absolute overlay */
+.agenix-button {
+    position: relative;
+    overflow: hidden;
+    --agenix-hover-bg: rgba(0, 0, 0, 0.08);
+    /* fallback */
+    --agenix-hover-duration: 350ms;
+    --agenix-hover-ease: cubic-bezier(.2, .9, .3, 1);
+}
+
+/* Overlay base */
+.agenix-hover-overlay {
+    position: absolute;
+    inset: 0;
+    /* top:0; right:0; bottom:0; left:0; */
+    pointer-events: none;
+    transform-origin: left center;
+    transition: transform var(--agenix-hover-duration) var(--agenix-hover-ease), opacity var(--agenix-hover-duration) var(--agenix-hover-ease);
+    background: var(--agenix-hover-bg);
+    opacity: 1;
+    transform: scaleX(0);
+    z-index: 1;
+}
+
+/* Ensure text/icon sit above overlay */
+.agenix-button-text,
+.agenix-button-icon {
+    position: relative;
+    z-index: 2;
+}
+
+/* Left to right reveal */
+.reveal-left-to-right .agenix-hover-overlay {
+    transform-origin: left center;
+}
+
+.reveal-left-to-right:hover .agenix-hover-overlay,
+.reveal-left-to-right:focus .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+/* Right to left reveal */
+.reveal-right-to-left .agenix-hover-overlay {
+    transform-origin: right center;
+}
+
+.reveal-right-to-left:hover .agenix-hover-overlay,
+.reveal-right-to-left:focus .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+/* Top to bottom reveal */
+.reveal-top-to-bottom .agenix-hover-overlay {
+    transform-origin: top center;
+    transform: scaleY(0);
+}
+
+.reveal-top-to-bottom:hover .agenix-hover-overlay,
+.reveal-top-to-bottom:focus .agenix-hover-overlay {
+    transform: scaleY(1);
+}
+
+/* Bottom to top reveal */
+.reveal-bottom-to-top .agenix-hover-overlay {
+    transform-origin: bottom center;
+    transform: scaleY(0);
+}
+
+.reveal-bottom-to-top:hover .agenix-hover-overlay,
+.reveal-bottom-to-top:focus .agenix-hover-overlay {
+    transform: scaleY(1);
+}
+
+/* Optional: make overlay blend nicely */
+.agenix-hover-overlay {
+    mix-blend-mode: normal;
+}

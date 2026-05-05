@@ -1,0 +1,187 @@
+@font-face {
+    font-family: 'eaicon';
+    src: url('/wp-content/plugins/agenix-addons/assets/fonts/eaicon.woff2') format('woff2'),
+        url('/wp-content/plugins/agenix-addons/assets/fonts/eaicon.woff') format('woff'),
+        url('/wp-content/plugins/agenix-addons/assets/fonts/eaicon.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* Basic frontend styling for Agenix Button */
+.agenix-button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: var(--agenix-icon-gap, 8px);
+    position: relative;
+    overflow: hidden;
+    padding: 12px 24px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: var(--agenix-text-color, #fff);
+    background: var(--agenix-bg, #0073aa);
+    transition: color .3s ease, background-color .3s ease, border-color .3s ease;
+}
+
+.agenix-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--agenix-hover-bg, transparent);
+    z-index: 0;
+    transform: scaleX(0);
+    transition: transform var(--agenix-hover-duration, .4s) var(--agenix-hover-easing, ease);
+}
+
+.agenix-button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+/* Make SVGs and icon fonts inherit color */
+.agenix-button-icon svg,
+.agenix-button-icon i {
+    width: auto;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    color: inherit;
+    fill: currentColor;
+    stroke: currentColor;
+    font-size: inherit;
+}
+
+/* Hover overlay (reveal) */
+.agenix-hover-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    background: var(--agenix-hover-bg);
+    z-index: 1;
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform var(--agenix-hover-duration) var(--agenix-hover-ease), opacity var(--agenix-hover-duration) var(--agenix-hover-ease);
+    will-change: transform, opacity;
+    opacity: 1;
+    inset: 0;
+}
+
+.agenix-button:hover {
+    background: var(--agenix-hover-bg, #005f8d);
+    color: var(--agenix-hover-text-color, #fff);
+}
+
+/* 
+.agenix-button:hover .agenix-button-icon {
+    color: inherit;
+} */
+
+
+.agenix-button:hover .agenix-button-icon,
+.agenix-button:hover .agenix-button-icon svg {
+    color: var(--agenix-icon-hover-color);
+    fill: var(--agenix-icon-hover-color);
+    stroke: var(--agenix-icon-hover-color);
+}
+
+/* Ensure text/icon sit above overlay */
+.agenix-button-text,
+.agenix-button-icon,
+.agenix-button-icon svg {
+    position: relative;
+    z-index: 2;
+}
+
+/* Hover reveal directions */
+.agenix-button.left-to-right::before {
+    transform-origin: left;
+}
+
+.agenix-button.right-to-left::before {
+    transform-origin: right;
+}
+
+.agenix-button.top-to-bottom::before {
+    transform-origin: top;
+    transform: scaleY(0);
+}
+
+.agenix-button.bottom-to-top::before {
+    transform-origin: bottom;
+    transform: scaleY(0);
+}
+
+.agenix-button.left-to-right:hover::before,
+.agenix-button.right-to-left:hover::before {
+    transform: scaleX(1);
+}
+
+.agenix-button.top-to-bottom:hover::before,
+.agenix-button.bottom-to-top:hover::before {
+    transform: scaleY(1);
+}
+
+.reveal-left-to-right .agenix-hover-overlay {
+    transform-origin: left center;
+}
+
+.reveal-left-to-right:hover .agenix-hover-overlay,
+.reveal-left-to-right:focus .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+/* Right to left reveal */
+.reveal-right-to-left .agenix-hover-overlay {
+    transform-origin: right center;
+}
+
+.reveal-right-to-left:hover .agenix-hover-overlay,
+.reveal-right-to-left:focus .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+/* Top to bottom reveal */
+.reveal-top-to-bottom .agenix-hover-overlay {
+    transform-origin: top center;
+    transform: scaleY(0);
+}
+
+.reveal-top-to-bottom:hover .agenix-hover-overlay,
+.reveal-top-to-bottom:focus .agenix-hover-overlay {
+    transform: scaleY(1);
+}
+
+/* Bottom to top reveal */
+.reveal-bottom-to-top .agenix-hover-overlay {
+    transform-origin: bottom center;
+    transform: scaleY(0);
+}
+
+.reveal-bottom-to-top:hover .agenix-hover-overlay,
+.reveal-bottom-to-top:focus .agenix-hover-overlay {
+    transform: scaleY(1);
+}
+
+.agenix-left-align {
+    text-align: left;
+}
+
+.agenix-center-align {
+    text-align: center;
+}
+
+.agenix-right-align {
+    text-align: right;
+}
+

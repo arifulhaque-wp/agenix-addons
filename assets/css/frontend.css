@@ -1,0 +1,170 @@
+@font-face {
+    font-family: 'eaicon';
+    src: url('/wp-content/plugins/agenix-addons/assets/fonts/eaicon.woff2') format('woff2'),
+        url('/wp-content/plugins/agenix-addons/assets/fonts/eaicon.woff') format('woff'),
+        url('/wp-content/plugins/agenix-addons/assets/fonts/eaicon.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Agenix Button frontend styles */
+.agenix-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--agenix-icon-gap, 8px);
+    padding: 12px 24px;
+    border-radius: 6px;
+    color: var(--agenix-text-color, #fff);
+    background: var(--agenix-bg, #0073aa);
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 220ms ease, color 220ms ease;
+    box-sizing: border-box;
+}
+
+.agenix-button .button-content {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Text and icon stacking */
+/* Ensure the button text uses the normal color variable */
+.agenix-button .agenix-button-text {
+    color: var(--agenix-text-color, #ffffff);
+    transition: color 220ms ease;
+    position: relative;
+    z-index: 2;
+}
+
+.agenix-button .agenix-hover-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Use hover variable when the button is hovered or focused */
+.agenix-button:hover {
+    background-color: var(--agenix-hover-bg, inherit);
+}
+
+.agenix-button:hover .agenix-button-text,
+.agenix-button:focus-within .agenix-button-text {
+    color: var(--agenix-hover-text-color, var(--agenix-text-color, #ffffff));
+}
+
+/* Editor canvas: trigger hover when the editor wrapper is hovered */
+.elementor-editor-active .elementor-element:hover .agenix-button .agenix-button-text {
+    color: var(--agenix-hover-text-color, var(--agenix-text-color, #ffffff));
+}
+
+.agenix-button .agenix-button-icon {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Hover background color handled by control selectors (Elementor) */
+
+/* Hover overlay base */
+/* .agenix-button .agenix-hover-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--agenix-hover-bg, rgba(0, 0, 0, 0.08));
+    z-index: 1;
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 350ms cubic-bezier(.2, .9, .3, 1);
+    will-change: transform, opacity;
+} */
+
+.agenix-button .elementor-icon {
+    margin: 0 6px;
+}
+
+/* Example hover reveal effect */
+.agenix-button.hover-reveal-slide .agenix-hover-overlay {
+    transform: translateX(-100%);
+}
+.agenix-button.hover-reveal-slide:hover .agenix-hover-overlay {
+    transform: translateX(0);
+}
+
+/* Reveal directions */
+.agenix-button.reveal-left-to-right:hover .agenix-hover-overlay,
+.agenix-button.reveal-left-to-right:focus-within .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+.agenix-button.reveal-right-to-left .agenix-hover-overlay {
+    transform-origin: right center;
+}
+
+.agenix-button.reveal-right-to-left:hover .agenix-hover-overlay,
+.agenix-button.reveal-right-to-left:focus-within .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+.agenix-button.reveal-top-to-bottom .agenix-hover-overlay {
+    transform-origin: top center;
+    transform: scaleY(0);
+}
+
+.agenix-button.reveal-top-to-bottom:hover .agenix-hover-overlay,
+.agenix-button.reveal-top-to-bottom:focus-within .agenix-hover-overlay {
+    transform: scaleY(1);
+}
+
+.agenix-button.reveal-bottom-to-top .agenix-hover-overlay {
+    transform-origin: bottom center;
+    transform: scaleY(0);
+}
+
+.agenix-button.reveal-bottom-to-top:hover .agenix-hover-overlay,
+.agenix-button.reveal-bottom-to-top:focus-within .agenix-hover-overlay {
+    transform: scaleY(1);
+}
+
+/* Accessibility */
+.agenix-button:focus {
+    outline: 2px solid rgba(0, 0, 0, 0.12);
+    outline-offset: 2px;
+}
+
+.agenix-left-align {
+    text-align: left;
+}
+
+.agenix-center-align {
+    text-align: center;
+}
+
+.agenix-right-align {
+    text-align: right;
+}
+
+/* Hover shim: respond to class as well as :hover */
+.agenix-button.is-hover .agenix-hover-overlay,
+.agenix-button.is-hover:focus-within .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+/* Editor wrapper shim: when editor wrapper has is-hover, trigger overlay */
+.elementor-editor-active .elementor-element.is-hover .agenix-button .agenix-hover-overlay {
+    transform: scaleX(1);
+}
+
+/* For right-to-left reveal keep origin */
+.agenix-button.reveal-right-to-left.is-hover .agenix-hover-overlay {
+    transform-origin: right center;
+}
